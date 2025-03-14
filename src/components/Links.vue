@@ -1,6 +1,6 @@
 <template>
   <div class="grid grid-cols-4 mx-auto w-11/12 md:grid-cols-8 md:w-2/3">
-    <a href="https://agentzhao.notion.site/my-projects" target="_self">
+    <a href="https://agentzhao.notion.site/myprojects" target="_self">
       <font-awesome-icon
         class="text-blue-600 hover:text-white icons"
         icon="rocket"
