@@ -1,0 +1,15 @@
+services:
+  nginx:
+    image: nginx:latest
+    container_name: agentzhao
+    volumes:
+      - $PWD/dist:/usr/share/nginx/html
+    restart: always
+    network_mode: traefik
+    labels:
+      - "traefik.enabled=true"
+      - "traefik.http.routers.agentzhao.rule=Host(`agentzhao.me`)"
+      - "traefik.http.routers.agentzhao.tls=true"
+      - "traefik.http.routers.agentzhao.tls.certresolver=lets-encrypt"
+      - "traefik.http.routers.agentzhao.entrypoints=websecure"
+      - "traefik.port=80"

@@ -22,7 +22,9 @@
   <section>
     <div class="mx-auto mb-10 w-2/3 text-xl font-bold md:w-3/5">
       Hello, I'm Hong Zhao. <br />
-      I'm a Year 2 Computer Science student at NTU, Singapore. <br />
+      Computer Science student at Nanyang Techonological University (NTU)
+      Singapore <br />
+      Programming since 2017. <br />
     </div>
   </section>
 </template>

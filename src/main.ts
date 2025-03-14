@@ -13,8 +13,10 @@ import {
   faEnvelope,
   faImage,
   faDownload,
-  faCalendar,
+  faHorse,
   faPenNib,
+  faClipboard,
+  faRocket,
 } from "@fortawesome/free-solid-svg-icons";
 
 import {
@@ -27,7 +29,8 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 
 library.add(
-  faCalendar,
+  faRocket,
+  faHorse,
   faEnvelope,
   faPenNib,
   faImage,
@@ -37,7 +40,8 @@ library.add(
   faGithub,
   faYoutube,
   faSpotify,
-  faLinkedin
+  faLinkedin,
+  faClipboard,
 );
 
 createApp(App).component("font-awesome-icon", FontAwesomeIcon).mount("#app");

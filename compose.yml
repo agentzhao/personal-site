@@ -1,0 +1,18 @@
+services:
+  agentzhao-dev:
+    image: agentzhao-dev:latest
+    container_name: agentzhao-dev
+    build:
+      context: ./
+    ports:
+      - "5173:5173"
+    volumes:
+      - .:/app
+      - /app/node_modules #empty mount to not overwrite node_modules
+      - $PWD/dist:/app/dist
+    environment:
+      - NODE_ENV="development"
+
+networks:
+  internal:
+    internal: true
