@@ -1,6 +1,14 @@
 # Personal Site
 
-### Mirroring from gitlab to github
+### Dev
 
-https://agentzhao@github.com/agentzhao/site.git
-personal access token as password
+```
+docker compose up -d
+```
+
+### Prod
+
+```
+npm run build
+docker compose -f compose.prod.yml up -d
+```

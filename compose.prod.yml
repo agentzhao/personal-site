@@ -10,6 +10,12 @@ services:
       - "traefik.enabled=true"
       - "traefik.http.routers.agentzhao.rule=Host(`agentzhao.me`)"
       - "traefik.http.routers.agentzhao.tls=true"
-      - "traefik.http.routers.agentzhao.tls.certresolver=lets-encrypt"
+      - "traefik.http.routers.agentzhao.tls.certresolver=cloudflare"
       - "traefik.http.routers.agentzhao.entrypoints=websecure"
       - "traefik.port=80"
+
+networks:
+  internal:
+    internal: true
+  traefik:
+    external: true
