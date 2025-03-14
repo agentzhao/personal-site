@@ -1,21 +1,40 @@
 services:
-  nginx:
+  agentzhao:
     image: nginx:latest
     container_name: agentzhao
     volumes:
       - $PWD/dist:/usr/share/nginx/html
     restart: always
-    network_mode: traefik
+    networks:
+      - proxy
+    ports:
+      - "8080:80"
     labels:
-      - "traefik.enabled=true"
+      # Enables Traefik for this container.
+      - "traefik.enable=true"
+      # Defines the HTTP entry point for the router
+      - "traefik.http.routers.agentzhao.entrypoints=web"
+      # Defines the routing rule: only route traffic with the host `agentzhao.me` to this container.
       - "traefik.http.routers.agentzhao.rule=Host(`agentzhao.me`)"
-      - "traefik.http.routers.agentzhao.tls=true"
-      - "traefik.http.routers.agentzhao.tls.certresolver=cloudflare"
-      - "traefik.http.routers.agentzhao.entrypoints=websecure"
-      - "traefik.port=80"
+      # Redirects HTTP traffic to HTTPS for the agentzhao service.
+      - "traefik.http.middlewares.agentzhao-https-redirect.redirectscheme.scheme=https"
+        #- "traefik.http.middlewares.sslheader.headers.customrequestheaders.X-Forwarded-Proto=https"
+      # Applies the HTTPS redirection middleware to the agentzhao router.
+      - "traefik.http.routers.agentzhao.middlewares=agentzhao-https-redirect"
+      # Defines the HTTPS entry point for the agentzhao router.
+      - "traefik.http.routers.agentzhao-secure.entrypoints=websecure"
+      # Defines the routing rule for secure HTTPS requests to `agentzhao.me`.
+      - "traefik.http.routers.agentzhao-secure.rule=Host(`agentzhao.me`)"
+      # Enables TLS (HTTPS) for the secure agentzhao route.
+      - "traefik.http.routers.agentzhao-secure.tls=true"
+      # Enables TLS with cloudflare
+      - "traefik.http.routers.agentzhao-secure.tls.certresolver=cloudflare"
+      # Defines the service name as 'agentzhao' for the secure router.
+      - "traefik.http.routers.agentzhao-secure.service=agentzhao"
+      # Specifies the port
+      - "traefik.http.services.agentzhao.loadbalancer.server.port=80"
+      - "traefik.docker.network=proxy"
 
 networks:
-  internal:
-    internal: true
-  traefik:
+  proxy:
     external: true
